@@ -21,6 +21,6 @@ from django.views.generic import TemplateView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
-    path('demo/', TemplateView.as_view(template_name='demo_index.html'), name='demo-index'),
+    path('demo/', TemplateView.as_view(template_name='demo.html'), name='demo-index'),
     path('demo/quality/', include('quality_dashboards.urls')),
 ]

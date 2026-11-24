@@ -1,0 +1,175 @@
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+}
+
+.navbar {
+  width: 100%;
+  height: 64px;
+  background-color: #262626;
+}
+
+.navbar-links {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+}
+
+.navbar-links a {
+  color: #f4f4f4;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-weight: 200;
+  text-decoration: none;
+}
+
+.profile-section {
+  min-height: calc(100vh - 64px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+  padding: 48px;
+  box-sizing: border-box;
+}
+
+.profile-picture {
+  width: 240px;
+  height: 240px;
+  flex: 0 0 240px;
+  border: 2px solid #262626;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Inter", sans-serif;
+  color: #777;
+  background-color: #f4f4f4;
+}
+
+.profile-text {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 440px;
+}
+
+.profile-text p {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  color: #2d2d2d;
+}
+
+.title,
+.subtext,
+.body,
+.links {
+  font-family: "Inter", sans-serif;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.subtext {
+  font-size: 12px;
+  font-weight: 200;
+}
+
+.body {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.links {
+  font-size: 16px;
+  font-weight: 200;
+}
+
+.profile-text .links {
+  color: #777;
+  text-decoration: none;
+  line-height: 1;
+  margin-top: -4px;
+  margin-bottom: -4px;
+}
+
+.demo-section {
+  min-height: calc(100vh - 64px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+  box-sizing: border-box;
+}
+
+.demo-list {
+  width: min(440px, 100%);
+}
+
+.demo-item {
+  position: relative;
+  min-height: 76px;
+}
+
+.demo-title {
+  margin: 0;
+}
+
+.demo-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.demo-title a:hover,
+.demo-title a:focus-visible {
+  text-decoration: underline;
+}
+
+.demo-description {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  margin: 0;
+  line-height: 1.4;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.demo-item:hover .demo-description {
+  visibility: visible;
+  opacity: 1;
+}
+
+@media (min-width: 1024px) {
+  .demo-section {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-rows: repeat(4, minmax(0, 1fr));
+    height: calc(100vh - 64px);
+    padding-inline: 0;
+  }
+
+  .demo-list {
+    grid-column: 2 / span 2;
+    grid-row: 2 / span 3;
+    justify-self: start;
+    align-self: start;
+  }
+}
+
+@media (max-width: 640px) {
+  .profile-section {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .profile-text {
+    width: min(320px, 100%);
+  }
+}

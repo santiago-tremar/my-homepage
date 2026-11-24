@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Demo{% endblock title %}
+
+{% block content %}
+  <main class="demo-section">
+    <div class="demo-list">
+      <article class="demo-item">
+        <h2 class="title demo-title"><a href="{% url 'station-manager' %}">Quality Dashboard</a></h2>
+        <p class="subtext demo-description">Try a production Yield report that is consistent and customizable across Product Families.</p>
+      </article>
+      <article class="demo-item">
+        <h2 class="title demo-title">Automatic Excel</h2>
+        <p class="subtext demo-description">Automate repetitive Excel reporting workflows.</p>
+      </article>
+      <article class="demo-item">
+        <h2 class="title demo-title">Placeholder</h2>
+        <p class="subtext demo-description">More details coming soon.</p>
+      </article>
+    </div>
+  </main>
+{% endblock content %}

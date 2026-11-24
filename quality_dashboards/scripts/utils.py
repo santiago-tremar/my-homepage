@@ -50,6 +50,3 @@ def write_families_and_stations_to_database():
             station_type=station,
             defaults={"operation_id": 0},
         )
-    ## As this is just a demo and I currently lack the tools to
-    ## constantly generate more mock data, I am writing to the DB
-    ## only if it has no data to ensure quicker page refreshes. 

@@ -8,26 +8,12 @@ from .forms import StationProcessFormSet
 
 from .scripts.utils import (
     get_family_selection,
-    write_families_and_stations_to_database,
 )
-
-# Create your views here.
 
 def station_list_view(request):
     """ Allow Visitors to define Station Operation IDs
         and toggle reporting of each. """
 
-    # Check if DB contains any families.
-    if not ProcessMap.objects.exists():
-        write_families_and_stations_to_database()
-            ## As this is just a demo and I currently lack the tools to
-            ## consistently generate new mock data, I am writing to the DB
-            ## only if it is empty to ensure quicker page loads after the fact.
-        if ProcessMap.objects.exists():
-            return redirect(reverse('station-manager')) # Force the page to reload after writing to the DataBase.
-        else:
-            return redirect(reverse('home'))
-    
     families, selected_family = get_family_selection(request)
 
     station_queryset = ProcessMap.objects.filter(family=selected_family)
