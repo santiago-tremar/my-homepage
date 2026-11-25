@@ -91,6 +91,216 @@
   left: auto;
 }
 
+/* Apply the Google Inter font consistently to all yield dashboard content. */
+.dashboard-font-scope,
+.dashboard-font-scope * {
+  font-family: "Inter", sans-serif;
+}
+
+/* Give each yield report its own bordered panel. */
+.dashboard-report-section {
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+  border: 1px solid #dee2e6;
+  border-radius: 0.375rem;
+  background: #fff;
+}
+
+/* Separate each report title and description from its table. */
+.dashboard-report-heading {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid #dee2e6;
+}
+
+/* Keep the section title prominent without extra default margins. */
+.dashboard-report-heading h2 {
+  margin: 0 0 0.25rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+/* Keep report tables inside the horizontal-scroll viewport. */
+.dashboard-yield-table-wrapper {
+  width: 100%;
+}
+
+/* Keep all date groups on one line and remove extra space below the table. */
+.dashboard-yield-table {
+  min-width: max-content;
+  margin-bottom: 0;
+}
+
+/* Match cell spacing and alignment in both manually built and Pandas tables. */
+.dashboard-yield-table th,
+.dashboard-yield-table td,
+.dashboard-yield-table-wrapper .dataframe th,
+.dashboard-yield-table-wrapper .dataframe td {
+  padding: 0.75rem 1rem;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+/* Use compact uppercase headers across both yield tables. */
+.dashboard-yield-table th,
+.dashboard-yield-table-wrapper .dataframe th {
+  color: #f7f7f7;
+  font-size: 0.74rem;
+  font-weight: 750;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Give both yield tables a consistent dark header. */
+.dashboard-yield-table thead th,
+.dashboard-yield-table-wrapper .dataframe thead th {
+  background: #383838;
+}
+
+/* Keep the Operation ID column narrow and centered. */
+.dashboard-id-header,
+.dashboard-id-cell {
+  width: 64px;
+  min-width: 64px;
+  max-width: 64px;
+  text-align: center;
+}
+
+/* Keep Station Type readable while allowing long names to wrap. */
+.dashboard-station-cell {
+  width: 220px;
+  min-width: 220px;
+  max-width: 220px;
+  font-weight: 650;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+/* Freeze ID at the left edge and Station Type immediately after it. */
+.dashboard-yield-table thead tr:first-child th:nth-child(1),
+.dashboard-yield-table tbody tr:not(.dashboard-rty-row) td:nth-child(1) {
+  position: sticky;
+  left: 0;
+  z-index: 3;
+  width: 64px;
+  min-width: 64px;
+  max-width: 64px;
+  background-color: #fff;
+}
+
+.dashboard-yield-table thead tr:first-child th:nth-child(2),
+.dashboard-yield-table tbody tr:not(.dashboard-rty-row) td:nth-child(2) {
+  position: sticky;
+  left: 64px;
+  z-index: 3;
+  background-color: #fff;
+}
+
+/* Keep frozen column headings above the scrolling table body. */
+.dashboard-yield-table thead tr:first-child th:nth-child(1),
+.dashboard-yield-table thead tr:first-child th:nth-child(2) {
+  z-index: 5;
+  background: #1a1a1a;
+}
+
+.dashboard-yield-table thead tr:first-child th:nth-child(2),
+.dashboard-yield-table tbody tr:not(.dashboard-rty-row) td:nth-child(2) {
+  /* Visually distinguish the frozen Station Type column's right edge. */
+  box-shadow: 1px 0 0 #dee2e6;
+}
+
+/* Preserve opaque stripe and hover colors on the frozen cells. */
+.dashboard-yield-table.table-striped > tbody > tr:nth-of-type(odd):not(.dashboard-rty-row) > td:nth-child(-n + 2) {
+  background-color: #f2f2f2;
+}
+
+.dashboard-yield-table.table-hover > tbody > tr:not(.dashboard-rty-row):hover > td:nth-child(-n + 2) {
+  background-color: #ededed;
+}
+
+/* Keep Fail and Pass headers compact; separate each date group's first metric. */
+.dashboard-metric-fail,
+.dashboard-metric-pass {
+  width: 64px;
+  min-width: 64px;
+  max-width: 64px;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  text-align: center;
+}
+
+.dashboard-date-group-start,
+.dashboard-metric-start {
+  border-left: 2px solid #cbd5e1;
+}
+
+/* Compact the Fail and Pass body cells, which repeat four metrics per date. */
+.dashboard-yield-table tbody tr:not(.dashboard-rty-row) td:nth-child(4n + 3),
+.dashboard-yield-table tbody tr:not(.dashboard-rty-row) td:nth-child(4n + 4) {
+  width: 64px;
+  min-width: 64px;
+  max-width: 64px;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  text-align: center;
+}
+
+/* Draw a vertical divider before each date's set of four metrics. */
+.dashboard-yield-table tbody tr:not(.dashboard-rty-row) td:nth-child(4n + 3) {
+  border-left: 2px solid #e2e8f0;
+}
+
+/* Center the message when a family has no yield rows. */
+.dashboard-empty-state {
+  padding: 2rem 1rem;
+  color: #6c757d;
+  text-align: center;
+}
+
+/* Highlight the RTY summary row and keep it legible across the table. */
+.dashboard-rty-row {
+  background: #edf3ff;
+}
+
+.dashboard-rty-row th,
+.dashboard-rty-row td {
+  border-top: 2px solid #000000;
+  color: #001847;
+  font-weight: 750;
+}
+
+/* Keep the RTY label visible while scrolling horizontally. */
+.dashboard-rty-label {
+  position: sticky;
+  left: 0;
+  z-index: 4;
+  background: #edf3ff;
+}
+
+/* Center the RTY marker in the three-cell metric group. */
+.dashboard-rty-group-label {
+  border-left: 1px solid #d8e4fa;
+  text-align: center;
+}
+
+/* Normalize the HTML table generated from the TPY dataframe. */
+.dashboard-yield-table-wrapper > .dataframe {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 0;
+  text-align: left;
+}
+
+/* Add alternating rows and hover feedback to the generated TPY table. */
+.dashboard-yield-table-wrapper .dataframe tbody tr:nth-child(even) {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+/* Highlight the hovered row in the Pandas-generated TPY table. */
+.dashboard-yield-table-wrapper .dataframe tbody tr:hover {
+  background: #f8faff;
+}
+
+/* Tighten report heading spacing on small screens. */
 @media (max-width: 767.98px) {
   .dashboard-heading {
     flex-direction: column;
@@ -105,5 +315,9 @@
   .dashboard-station-table input[name$="-operation_id"] {
     width: 8rem;
     max-width: 100%;
+  }
+
+  .dashboard-report-heading {
+    padding: 1rem;
   }
 }

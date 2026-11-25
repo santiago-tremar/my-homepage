@@ -15,11 +15,11 @@
         <h1 class="mb-0">Quality Dashboard</h1>
         <div class="dashboard-view-toggle" role="group" aria-label="Quality dashboard views">
           <a href="{% url 'station-manager' %}" class="dashboard-view-option dashboard-view-option-active subtext" aria-current="page">Station Manager</a>
-          <button type="button" class="dashboard-view-option subtext" disabled>Yield Report</button>
+          <a href="{% url 'yields' %}" class="dashboard-view-option subtext">Yield Report</a>
         </div>
       </div>
       <p class="text-body-secondary mb-4">
-        Select a Product Family, then configure each Station's Operation ID and whether to show them in the reports.
+        Select a product family, then configure each station's operation ID and whether to show them in the reports.
       </p>
 
       {% for message in messages %}

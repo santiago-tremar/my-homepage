@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Quality Dashboard: Yield Report{% endblock title %}
+
+{% block extra_head %}
+  <link href="{% static 'css/dashboard.css' %}" rel="stylesheet">
+{% endblock extra_head %}
+
+{% block content %}
+<main class="container py-5 dashboard-font-scope">
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+      <div class="dashboard-heading">
+        <h1 class="mb-0">Quality Dashboard</h1>
+        <div class="dashboard-view-toggle" role="group" aria-label="Quality dashboard views">
+          <a href="{% url 'station-manager' %}" class="dashboard-view-option subtext">Station Manager</a>
+          <a href="{% url 'yields' %}" class="dashboard-view-option dashboard-view-option-active subtext" aria-current="page">Yield Report</a>
+        </div>
+      </div>
+      <p class="text-body-secondary mb-4">
+        Review daily station yields and rolled-throughput yield for the selected family, as you defined in Station Manager.
+      </p>
+
+      <form method="get" action="{% url 'yields' %}" class="row g-2 align-items-end mb-4">
+        <div class="col-sm-8 col-md-6">
+          <label for="family" class="form-label">Family</label>
+          <select id="family" name="family" class="form-select" onchange="this.form.requestSubmit()">
+            {% for family in families %}
+              <option value="{{ family }}"{% if family == selected_family %} selected{% endif %}>{{ family }}</option>
+            {% empty %}
+              <option value="">No families available</option>
+            {% endfor %}
+          </select>
+        </div>
+      </form>
+
+      <section class="dashboard-report-section" aria-labelledby="fpy-heading">
+        <div class="dashboard-report-heading">
+          <h2 id="fpy-heading">First Pass Yield</h2>
+          <p class="text-body-secondary mb-0">Quickly check performance over the last seven days.</p>
+        </div>
+        <div class="table-responsive dashboard-yield-table-wrapper">
+          <table class="table table-striped table-hover align-middle dashboard-yield-table">
+            <thead>
+              <tr>
+                <th scope="col" rowspan="2" class="dashboard-id-header">ID</th>
+                <th scope="col" rowspan="2" class="dashboard-station-cell">Station Type</th>
+                {% for date in fpy_dates %}
+                  <th scope="colgroup" colspan="4" class="dashboard-date-group-start">{{ date }}</th>
+                {% endfor %}
+              </tr>
+              <tr>
+                {% for date in fpy_dates %}
+                  {% for metric in metrics %}
+                    <th scope="col" class="{% if forloop.first %}dashboard-metric-start{% endif %} {% if forloop.counter0 == 0 %}dashboard-metric-fail{% elif forloop.counter0 == 1 %}dashboard-metric-pass{% endif %}">{{ metric }}</th>
+                  {% endfor %}
+                {% endfor %}
+              </tr>
+            </thead>
+            <tbody>
+              {% for row in fpy_rows %}
+                <tr>
+                  <td class="dashboard-id-cell">{{ row.operation_id }}</td>
+                  <td class="dashboard-station-cell">{{ row.station_type }}</td>
+                  {% for cell in row.cells %}
+                    <td>{{ cell }}</td>
+                  {% endfor %}
+                </tr>
+              {% empty %}
+                <tr>
+                  <td colspan="2" class="dashboard-empty-state">No FPY results for this family.</td>
+                </tr>
+              {% endfor %}
+              {% if fpy_dates %}
+                <tr class="dashboard-rty-row">
+                  <th scope="row" colspan="2" class="dashboard-rty-label">RTY</th>
+                  {% for rty in fpy_rty_values %}
+                    <td class="dashboard-rty-group-label" colspan="3">RTY:</td>
+                    <td>{{ rty }}</td>
+                  {% endfor %}
+                </tr>
+              {% endif %}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="dashboard-report-section" aria-labelledby="tpy-heading">
+        <div class="dashboard-report-heading">
+          <h2 id="tpy-heading">Test Station Yield without False Calls</h2>
+          <p class="text-body-secondary mb-0">Best for test stations. 
+            Gauge how much production is impacted by failing a first time and passing until later tests.</p>
+        </div>
+        <div class="table-responsive dashboard-yield-table-wrapper">
+          <table class="table table-striped table-hover align-middle dashboard-yield-table">
+            <thead>
+              <tr>
+                <th scope="col" rowspan="2" class="dashboard-id-header">ID</th>
+                <th scope="col" rowspan="2" class="dashboard-station-cell">Station Type</th>
+                {% for date in tpy_dates %}
+                  <th scope="colgroup" colspan="4" class="dashboard-date-group-start">{{ date }}</th>
+                {% endfor %}
+              </tr>
+              <tr>
+                {% for date in tpy_dates %}
+                  {% for metric in metrics %}
+                    <th scope="col" class="{% if forloop.first %}dashboard-metric-start{% endif %} {% if forloop.counter0 == 0 %}dashboard-metric-fail{% elif forloop.counter0 == 1 %}dashboard-metric-pass{% endif %}">{{ metric }}</th>
+                  {% endfor %}
+                {% endfor %}
+              </tr>
+            </thead>
+            <tbody>
+              {% for row in tpy_rows %}
+                <tr>
+                  <td class="dashboard-id-cell">{{ row.operation_id }}</td>
+                  <td class="dashboard-station-cell">{{ row.station_type }}</td>
+                  {% for cell in row.cells %}
+                    <td>{{ cell }}</td>
+                  {% endfor %}
+                </tr>
+              {% empty %}
+                <tr>
+                  <td colspan="2" class="dashboard-empty-state">No TPY results for this family.</td>
+                </tr>
+              {% endfor %}
+              {% if tpy_dates %}
+                <tr class="dashboard-rty-row">
+                  <th scope="row" colspan="2" class="dashboard-rty-label">RTY</th>
+                  {% for rty in tpy_rty_values %}
+                    <td class="dashboard-rty-group-label" colspan="3">RTY:</td>
+                    <td>{{ rty }}</td>
+                  {% endfor %}
+                </tr>
+              {% endif %}
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </div>
+</main>
+{% endblock content %}
