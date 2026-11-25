@@ -114,4 +114,4 @@ class RawDataFormTests(TestCase):
         self.assertTrue(self.good_form.is_valid())
         self.assertEqual(self.good_form.process_map_pairs,[('Alpha', 'Assembly')])
         self.assertFalse(self.bad_form.is_valid())
-        self
+        
